@@ -20,7 +20,7 @@ Motion::Project::App.setup do |app|
   app.version = $version
 
   app.device_family = [:iphone, :ipad]
-  app.interface_orientations = [:portrait, :landscape_left, :landscape_right, :portrait_upside_down]
+  app.interface_orientations = [:portrait]
 
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
   app.resources_dirs += %w(resources/icons)

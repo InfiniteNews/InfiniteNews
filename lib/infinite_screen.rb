@@ -13,13 +13,16 @@ class InfiniteScreen < UIPageViewController
     self.pages = self.items.map.with_index { |item, index| self.screen_type.new item: item, index: index }
     self.current_page = self.pages.first
 
+    setup
     init_pages
   end
 
-  def init_pages
+  def setup
     self.dataSource = self
     self.delegate = self
+  end
 
+  def init_pages
     self.setViewControllers self.pages.take(1), direction: UIPageViewControllerNavigationDirectionForward, animated: true, completion: nil
   end
 
@@ -56,10 +59,10 @@ class InfiniteScreen < UIPageViewController
   end
 
   def self.new(args = {})
-    s = self.alloc.initWithTransitionStyle UIPageViewControllerTransitionStyleScroll,
+    s = self.alloc.initWithTransitionStyle UIPageViewControllerTransitionStylePageCurl,
                     navigationOrientation: UIPageViewControllerNavigationOrientationHorizontal,
                                   options: {
-                                    UIPageViewControllerOptionSpineLocationKey: UIPageViewControllerSpineLocationMid
+                                    UIPageViewControllerOptionSpineLocationKey: UIPageViewControllerSpineLocationMin
                                   }
 
     s.screen_init(args) # Important for ProMotion stuff!

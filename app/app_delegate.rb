@@ -3,7 +3,7 @@ class AppDelegate < PM::Delegate
 
   def on_load(app, options)
     return true if RUBYMOTION_ENV == "test"
-    open InfiniteNewsScreen.new(items: [:beijing, :chengdu, :guangzhou, :shanghai, :shenyang], screen_type: NewsScreen)
+    open InfiniteNewsScreen.new(items: [:InfiniteNews], screen_type: NewsScreen)
 
     UINavigationBar.appearance.tintColor = :white.uicolor
     UINavigationBar.appearance.barTintColor = [255, 102, 0].uicolor
