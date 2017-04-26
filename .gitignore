@@ -1,0 +1,27 @@
+.repl_history
+build
+tags
+app/pixate_code.rb
+resources/*.nib
+resources/*.momd
+resources/*.storyboardc
+.DS_Store
+nbproject
+.redcar
+#*#
+*~
+*.sw[po]
+.eprj
+.sass-cache
+.idea
+.dat*.*
+
+# motion-infinite ignore
+Gemfile.lock
+/resources/Settings.bundle/
+/vendor/Podfile.lock
+/vendor/Pods
+/vendor/build
+/vendor/gems/
+/.bundle/
+/provisioning/

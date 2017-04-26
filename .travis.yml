@@ -1,0 +1,16 @@
+language: objective-c
+osx_image: xcode8.3
+cache:
+  - bundler
+  - cocoapods
+rvm: 2.4
+before_install:
+  - (motion --version)
+  - (rvm list)
+install:
+  - sudo motion update || true
+before_script:
+  - (motion --version)
+  - (ruby --version)
+script:
+  - script/cibuild
