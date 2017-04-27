@@ -65,12 +65,18 @@ class InfiniteNewsScreen < InfiniteScreen
   end
 
   def fetch_stories(&block)
+    # Motion::Blitz.loading
+
     HN::News.beststories(self.more) do |res|
+      Motion::Blitz.success
+
       self.items = res[:stories]
 
       self.more = res[:more]
 
       block.call res if block
+
+      Motion::Blitz.dismiss
     end
   end
 
