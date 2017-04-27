@@ -8,7 +8,12 @@ class NewsScreen < PM::Screen
   end
 
   def on_load
-    layout.get(:title).text = "%s" % self.item
+    if self.item.is_a? String
+      layout.get(:title).text = "%s" % self.item
+    else
+      layout.get(:title).text = "%s" % self.item[:title]
+      layout.get(:rank).text = "#%s" % self.item[:rank]
+    end
   end
 
   def on_init
