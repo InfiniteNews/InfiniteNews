@@ -4,6 +4,7 @@ gem 'rake'
 gem 'motion-cocoapods'
 gem 'motion-settings-bundle', github: 'picapica/motion-settings-bundle'
 gem 'motion-acknowledgements', github: 'picapica/motion-acknowledgements'
+gem 'motion-provisioning'
 
 gem 'motion-kit'
 gem 'motion-kit-events'

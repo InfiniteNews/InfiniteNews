@@ -15,7 +15,7 @@ $version_fingerprint = '%s/%s/%s' % [$short_version, $version, `git log -1 --for
 
 Motion::Project::App.setup do |app|
   app.name = App.name
-  app.identifier = 'com.your_domain_here.%s' % app.name.downcase.strip.gsub(/\s/, '_')
+  app.identifier = 'com.liulantao.%s' % app.name.downcase.strip.gsub(/\s/, '_')
   app.short_version = $short_version
   app.version = $version
 
@@ -39,6 +39,26 @@ Motion::Project::App.setup do |app|
     if ENV['CI']
       app.codesign_certificate = nil
       app.provisioning_profile = nil
+
+    elsif ARGV[0] == 'device'
+      app.codesign_certificate = MotionProvisioning.certificate(
+        type: :development,
+        platform: :ios
+      )
+
+      app.provisioning_profile = MotionProvisioning.profile(
+        bundle_identifier: app.identifier,
+        app_name: app.name,
+        platform: :ios,
+        type: :development
+      )
+
+      puts "Using profile: #{app.provisioning_profile}"
+      puts "Using certificate: #{app.codesign_certificate}"
+
+    else
+      app.codesign_certificate = nil
+      app.provisioning_profile = nil
     end
   end
 
@@ -47,6 +67,21 @@ Motion::Project::App.setup do |app|
     app.entitlements['beta-reports-active'] = true
     app.entitlements['application-identifier'] = app.seed_id + '.' + app.identifier
     app.entitlements['keychain-access-groups'] = [ app.seed_id + '.' + app.identifier ]
+
+    app.codesign_certificate = MotionProvisioning.certificate(
+      type: :distribution,
+      platform: :ios
+    )
+
+    app.provisioning_profile = MotionProvisioning.profile(
+      bundle_identifier: app.identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :distribution
+    )
+
+    puts "Using profile: #{app.provisioning_profile}"
+    puts "Using certificate: #{app.codesign_certificate}"
   end
 end
 
