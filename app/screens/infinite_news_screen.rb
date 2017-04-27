@@ -4,16 +4,9 @@ class InfiniteNewsScreen < InfiniteScreen
   def on_load
     fetch_stories do |res|
       super
-    end
 
-    UISwipeGestureRecognizer.alloc.initWithTarget(self, action: :'swipe_left:').tap do |gesture|
-      gesture.direction = UISwipeGestureRecognizerDirectionLeft
-      self.view.addGestureRecognizer gesture
-    end
-
-    UISwipeGestureRecognizer.alloc.initWithTarget(self, action: :'swipe_right:').tap do |gesture|
-      gesture.direction = UISwipeGestureRecognizerDirectionRight
-      self.view.addGestureRecognizer gesture
+      self.view.on_swipe :left { direction = UIPageViewControllerNavigationDirectionForward;  update_page(direction) }
+      self.view.on_swipe :right { direction = UIPageViewControllerNavigationDirectionReverse;  update_page(direction) }
     end
   end
 

@@ -13,6 +13,9 @@ class NewsScreen < PM::Screen
     else
       layout.get(:title).text = "%s" % self.item[:title]
       layout.get(:rank).text = "#%s" % self.item[:rank]
+
+      layout.get(:title).userInteractionEnabled = true
+      layout.get(:title).on_tap(2) { self.item[:url].nsurl.open; }
     end
   end
 
